@@ -2,6 +2,7 @@
 title: "Ames, Iowa Regression Techniques Project"
 author: "Max Pagan"
 date: "2023-10-21"
+layout: default
 output: 
   html_document
 ---

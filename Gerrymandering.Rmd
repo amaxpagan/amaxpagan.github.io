@@ -2,6 +2,7 @@
 title: "Gerrymandering Project Graphs"
 author: "Max Pagan"
 date: "7/26/2022"
+layout: default
 output: html_document
 ---
 

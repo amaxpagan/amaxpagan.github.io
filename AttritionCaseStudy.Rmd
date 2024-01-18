@@ -2,6 +2,7 @@
 title: "Attrition Case Study"
 author: "Max Pagan"
 date: "2023-12-06"
+layout: default
 output:
   html_document
 ---
