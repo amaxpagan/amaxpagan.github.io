@@ -1,0 +1,37 @@
+---
+title: "Welcome!"
+output: 
+  html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Hello! I'm Arturo Max Pagan, but I usually go by Max 😎
+
+
+<div style="display: flex; justify-content: center; align-items: center;">
+
+```{r, out.width = "500px"}
+knitr::include_graphics("Image.jpg")
+```
+
+<div style="margin-left: 20px;">
+## About Me
+
+I am a Data Science Masters Student at Southern Methodist University. I'm passionate about social change, data science, music, cooking, exercise, vintage fashion, and more! Here are a few things about me:
+
+- **Current Location:** Melbourne, FL
+- **Education:** B.S. in Mathematics, Management Science, Data Science from Southern Methodist University
+- **Interests:** Cooking, producing music, running, cycling, weightlifting, binging YouTube
+
+## What You'll Find Here
+
+- Interesting projects I've competed for work & school
+- RShiny Apps
+- Whatever other fun projects I decide to share!
+
+Feel free to explore the site and [contact me](mailto:mpagan@smu.edu) if you have any questions or feedback.
+
+Thanks for visiting!

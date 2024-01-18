@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Max Pagan" />
+
+
+<title>Gerrymandering Project Graphs</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Pages:</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Welcome</a>
+</li>
+<li>
+  <a href="Gerrymandering.html">Gerrymandering</a>
+</li>
+<li>
+  <a href="Beers.html">Beers</a>
+</li>
+<li>
+  <a href="AmesProject.html">Ames Advanced Regression</a>
+</li>
+<li>
+  <a href="AttritionCaseStudy.html">Attrition Case Study</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Gerrymandering Project Graphs</h1>
+<h4 class="author">Max Pagan</h4>
+<h4 class="date">7/26/2022</h4>
+
+</div>
+
+
+<p>The purpose of this project is to demonstrate the disparity between
+the number of votes a party earns in a US house election and the amount
+of house seats they actually earn. Imagine a party that earns enough
+votes across a state that they should* get three house seats. That party
+might only earn two seats. Or more, or fewer. This could be because of
+gerrymandering, or some other, more specific and unique set of
+circumstances. In order to demonstrate the code and its functionality, I
+used the state of Florida and the year 2020 as inputs.</p>
+<p>Enter the year (between 1976 and 2020) and the postal code of the
+state you want to observe, and three graphs will be created. The first
+graph will show how many votes each party earned that year in each
+state. The second shows how many house seats that party should* have,
+based on the number of votes earned and the total number of available
+seats. The third graph shows the actual election results: how many seats
+were earned by each party.</p>
+<p>By showing these comparisons, I hope to demonstrate how
+disproportional some elections are in the US House. I also hope to bring
+attention to the most severe offenders. The most disproportional state
+elections as represented by this data could be investigated further. Is
+gerrymandering occurring there?</p>
+<p>** The assumption made when creating these representations is a big
+one. To say a party should earn seats because of the number of votes it
+got is assuming that people vote for specific parties above all other
+considerations. People don’t just vote for parties, though, they vote
+for candidates. And based on which existing district you live in, your
+vote might sway from one party to another. However, especially
+considering America’s current political climate, I don’t believe it is
+quite a stretch to say that most voters consider their candidate’s party
+first. Considering this, the data should not stand as a direct
+condemnation of states for having unfair elections. The graphs created
+here should instead stand as a jumping-off point for further
+investigation. Look at how disproportionate some states are, and ask
+why.</p>
+<p>Why do some states have third parties, which should earn seats but
+don’t?</p>
+<p>Why does one state have a Republican party with three seats too
+many?</p>
+<p>Why does another state have a Democrat party with three seats too
+many?</p>
+<p>Why does one state seem consistently disproportionate over the
+years?</p>
+<p>Questions like these are important to ask, and the data here will
+help you arrive at them.</p>
+<p>The data used comes from the <a
+href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IG0UN2">MIT
+Election Lab</a>.</p>
+<div id="importing-the-dataset" class="section level2">
+<h2>Importing the dataset</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+<pre class="r"><code>voting_data &lt;- read.csv(&quot;1976-2020-house (1).csv&quot;)</code></pre>
+</div>
+<div id="extracting-the-necessary-the-data." class="section level2">
+<h2>Extracting the necessary the data.</h2>
+<p>Which year do you want to look at?</p>
+<pre class="r"><code>#year.input &lt;- readline(prompt=&quot;Enter a year between 1976 and 2020: &quot;)
+#Adding default values:
+year.input &lt;- 2020
+voting_data_clean &lt;- voting_data  %&gt;% filter(year == year.input) %&gt;% select(state_po, district, candidate, party, candidatevotes) </code></pre>
+</div>
+<div id="how-many-districts-are-there-per-state" class="section level2">
+<h2>How many districts are there per state?</h2>
+<pre class="r"><code>num_districts &lt;- voting_data_clean %&gt;%  group_by(state_po) %&gt;% summarise(district_total = max(district)) %&gt;% arrange(district_total)
+
+num_districts &lt;- num_districts%&gt;% mutate_all(funs(replace(., .== 0, 1)))</code></pre>
+<pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
+## ℹ Please use a list of either functions or lambdas:
+## 
+## # Simple named list: list(mean = mean, median = median)
+## 
+## # Auto named with `tibble::lst()`: tibble::lst(mean, median)
+## 
+## # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre class="r"><code>voting_data_clean &lt;- voting_data_clean %&gt;% group_by(state_po) %&gt;% mutate(num_districts = max(district)) %&gt;% mutate_all(funs(replace(., .== 0, 1))) %&gt;% ungroup()</code></pre>
+<pre><code>## `mutate_all()` ignored the following grouping variables:
+## • Column `state_po`
+## ℹ Use `mutate_at(df, vars(-group_cols()), myoperation)` to silence the message.</code></pre>
+<pre><code>## Warning: `funs()` was deprecated in dplyr 0.8.0.
+## ℹ Please use a list of either functions or lambdas:
+## 
+## # Simple named list: list(mean = mean, median = median)
+## 
+## # Auto named with `tibble::lst()`: tibble::lst(mean, median)
+## 
+## # Using lambdas list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
+<pre class="r"><code>voting_data_clean &lt;- voting_data_clean %&gt;% group_by(state_po) %&gt;% mutate(totalvotes = sum(candidatevotes)) %&gt;% ungroup()
+
+voting_data_clean &lt;- voting_data_clean %&gt;% group_by(state_po, party) %&gt;% mutate(partyvotes = sum(candidatevotes)) %&gt;% mutate(proportion = partyvotes / totalvotes) %&gt;% mutate(idealNumSeats = round((proportion * num_districts), digits = 0))
+
+proportional_districts &lt;- voting_data_clean %&gt;% group_by(state_po, party) %&gt;% select(state_po, party, partyvotes, idealNumSeats)
+
+finalframe &lt;- proportional_districts %&gt;% distinct(state_po, party, partyvotes, idealNumSeats)</code></pre>
+<p>We’ll get rid of the parties that should win 0 seats</p>
+<pre class="r"><code>finalframe2 &lt;- finalframe %&gt;% filter(idealNumSeats != 0) %&gt;% replace(.==&quot;&quot;, &quot;NO PARTY LISTED&quot;)</code></pre>
+<p>Now that I have the ideal proportional division of house seats per
+party in each state, let’s take a look at the real numbers.</p>
+</div>
+<div id="real-results" class="section level2">
+<h2>Real results</h2>
+<pre class="r"><code>clean_data_2 &lt;- voting_data_clean %&gt;% select(state_po, district, candidate, party, candidatevotes) %&gt;% group_by(state_po, district) %&gt;% mutate(winner=ifelse(candidatevotes==max(candidatevotes, na.rm=TRUE),T,F))
+
+clean_data_3 &lt;- clean_data_2 %&gt;% filter(winner == T)
+
+num_seats_district &lt;- clean_data_3 %&gt;% select(state_po, party) %&gt;% group_by(state_po, party) %&gt;% mutate(numseats=n())</code></pre>
+<pre><code>## Adding missing grouping variables: `district`</code></pre>
+<pre class="r"><code>num_seats_state &lt;- num_seats_district %&gt;% select(state_po, party, numseats) %&gt;% distinct(state_po, party, numseats)</code></pre>
+<p>Now I have two useful tables: one that gives us the number of seats
+each party currently has (num_seats_state), and one that gives us the
+number of seats each party “deserves” based on the number of votes it
+received (finalframe2).</p>
+</div>
+<div id="creating-useful-graphs" class="section level2">
+<h2>Creating useful graphs</h2>
+<pre class="r"><code>#state.input &lt;- readline(prompt=&quot;Enter 2-Letter State Postal Code: &quot;)
+#Adding default values:
+state.input &lt;- &#39;FL&#39;
+
+this_state_ideal &lt;- finalframe2 %&gt;% arrange(match(party, c(&quot;DEMOCRAT&quot;, &quot;REPUBLICAN&quot;))) %&gt;% mutate(party = factor(x = party, levels = party))   %&gt;% filter(state_po == state.input)  
+this_state_current &lt;- num_seats_state %&gt;% arrange(match(party, c(&quot;DEMOCRAT&quot;, &quot;REPUBLICAN&quot;))) %&gt;% mutate(party = factor(x = party, levels = party))   %&gt;% filter(state_po == state.input) 
+
+this_state_ideal</code></pre>
+<pre><code>## # A tibble: 2 × 4
+## # Groups:   state_po, party [2]
+##   state_po party      partyvotes idealNumSeats
+##   &lt;chr&gt;    &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;
+## 1 FL       DEMOCRAT      4942287            13
+## 2 FL       REPUBLICAN    5469163            14</code></pre>
+<pre class="r"><code>this_state_current</code></pre>
+<pre><code>## # A tibble: 2 × 3
+## # Groups:   state_po, party [2]
+##   state_po party      numseats
+##   &lt;chr&gt;    &lt;fct&gt;         &lt;int&gt;
+## 1 FL       DEMOCRAT         11
+## 2 FL       REPUBLICAN       16</code></pre>
+<pre class="r"><code>hsize &lt;- 2
+
+plot1 &lt;- ggplot(data = this_state_ideal, aes(x = hsize, y = partyvotes, fill = party)) + 
+    geom_bar(stat = &quot;identity&quot;, position = position_fill()) +
+    geom_text(aes(label = partyvotes), color = &quot;white&quot;, size = 2, position = position_fill(vjust = 0.5)) +
+    coord_polar(theta = &quot;y&quot;) + xlim(c(0.2, hsize + 0.5)) +
+    facet_wrap(~ state_po, nrow = 1) +
+  scale_fill_manual(values = c(&quot;#E9141D&quot;, &quot;#0015BC&quot;, &#39;orange&#39;, &#39;green&#39;, &#39;purple&#39;))
+plot1 + theme(axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks.y=element_blank())</code></pre>
+<p><img src="Gerrymandering_files/figure-html/pt1-1.png" width="672" /></p>
+<pre class="r"><code>plot2 &lt;- ggplot(data = this_state_ideal, aes(x = hsize, y = idealNumSeats, fill = party)) + 
+    geom_bar(stat = &quot;identity&quot;, position = position_fill()) +
+    geom_text(aes(label = idealNumSeats),color = &quot;white&quot;, position = position_fill(vjust = 0.5)) +
+    coord_polar(theta = &quot;y&quot;) + xlim(c(0.2, hsize + 0.5)) +
+    facet_wrap(~ state_po, nrow = 1) +
+  scale_fill_manual(values = c(&quot;#E9141D&quot;, &quot;#0015BC&quot;, &#39;orange&#39;, &#39;green&#39;, &#39;purple&#39;))
+plot2 + theme(axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks.y=element_blank())</code></pre>
+<p><img src="Gerrymandering_files/figure-html/pt1-2.png" width="672" /></p>
+<pre class="r"><code>plot3 &lt;- ggplot(data = this_state_current, aes(x = hsize, y = numseats, fill = party)) + 
+    geom_bar(stat = &quot;identity&quot;, position = position_fill()) +
+    geom_text(aes(label = numseats),color = &quot;white&quot;, position = position_fill(vjust = 0.5)) +
+    coord_polar(theta = &quot;y&quot;) + xlim(c(0.2, hsize + 0.5)) +
+    facet_wrap(~ state_po, nrow = 1)  +
+  scale_fill_manual(values = c(&quot;#E9141D&quot;, &quot;#0015BC&quot;, &#39;orange&#39;, &#39;green&#39;, &#39;purple&#39;))
+plot3 + theme(axis.text.x=element_blank(),
+      axis.ticks.x=element_blank(),
+      axis.text.y=element_blank(),
+      axis.ticks.y=element_blank())</code></pre>
+<p><img src="Gerrymandering_files/figure-html/pt1-3.png" width="672" /></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

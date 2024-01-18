@@ -1,0 +1,14 @@
+name: "my-website"
+navbar:
+  title: "Pages:"
+  left:
+    - text: "Welcome"
+      href: index.html
+    - text: "Gerrymandering"
+      href: Gerrymandering.html
+    - text: "Beers"
+      href: Beers.html
+    - text: "Ames Advanced Regression"
+      href: AmesProject.html
+    - text: "Attrition Case Study"
+      href: AttritionCaseStudy.html

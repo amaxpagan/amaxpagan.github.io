@@ -1,0 +1,23 @@
+---
+title: "Ames, Iowa Regression Techniques Project"
+author: "Max Pagan"
+date: "2023-10-21"
+output: 
+  html_document
+---
+
+## 21st Century Ames: Advanced Regression
+
+The purpose of this analysis, conducted by Max Pagan and Christian Castro, is to understand the housing market of Ames, Iowa, and determine a model that accurately predicts the sale price of homes in the area for Century 21 Ames (which is a real estate company). The accuracy of each model is judged by the Root-Mean-Squared-Error (RMSE) for predictions vs the actual sale price, which means that the model with the least error is more accurate. These models are crafted using some of the 79 variables to choose from and proceed in one of two ways: 1) Predicting the prices of homes in NAmes, Edwards and BrkSide neighborhoods through finding the relationship between square footage of the home (in 100 sq.ft. increments) and location. This model will provide estimates for the client as well as a confidence interval for the estimates. 2) Predicting the sale prices of homes in all of Ames, doing so through 3 competing models: a simple linear regression model, a multiple linear regression model using sale price, living area, and bathroom count, alongside a third model using lot area, living area, land contour, and land slope. Each model is verified using R^2, CV Press, and Kaggle Score.
+
+## PDF of our final report:
+
+[Download PDF](Bonferroni_Project1_6371.pdf)
+
+## RShiny App:
+
+[Open RShiny App](https://amaxpagan.shinyapps.io/RShinyApp/)
+
+### Link to Christian's page:
+
+[Christian Castro](CDCastr0.github.io)
