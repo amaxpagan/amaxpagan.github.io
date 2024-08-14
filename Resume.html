@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume - Arturo Max Pagan</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            color: #444;
+            font-size: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+        h3 {
+            color: #444;
+            font-size: 18px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .contact-info {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .contact-info a {
+            color: #333;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .education-entry, .experience-entry {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .education-entry p, .experience-entry p {
+            margin: 0;
+        }
+        .education-degree, .experience-title {
+            flex: 1;
+        }
+        .education-degree-date, .experience-location, .experience-dates {
+            font-style: italic;
+            margin-left: 20px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .supplemental-info {
+            font-size: 14px;
+            color: #555;
+            margin-left: 20px;
+        }
+        p {
+            margin: 5px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Manually adding navigation -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Welcome</a></li>
+            <li><a href="Resume.html">Resume</a></li>
+            <li><a href="Gerrymandering.html">Gerrymandering</a></li>
+            <li><a href="Beers.html">Beers</a></li>
+            <li><a href="AmesProject.html">Ames Advanced Regression</a></li>
+            <li><a href="AttritionCaseStudy.html">Attrition Case Study</a></li>
+            <li><a href="StateMigrationDashboard.html">US State Migration Dashboard</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <h1>Arturo Max Pagan</h1>
+        <div class="contact-info">
+            <p><a href="mailto:mpagan@smu.edu">mpagan@smu.edu</a> | <a href="https://www.linkedin.com/in/arturo-max-pagan" target="_blank">LinkedIn</a></p>
+        </div>
+
+        <div class="section-content">
+            <h2>Education</h2>
+            
+            <div class="education-entry">
+                <div class="education-degree">
+                    <p><strong>Southern Methodist University</strong></p>
+                    <p>Master of Science in Data Science</p>
+                </div>
+                <p class="education-degree-date">May 2025</p>
+            </div>
+
+            <div class="education-entry">
+                <div class="education-degree">
+                    <p><strong>Southern Methodist University, Lyle School of Engineering</strong></p>
+                    <p>BS Management Science; BS Mathematics; BS Data Science</p>
+                </div>
+                <p class="education-degree-date">May 2023</p>
+            </div>
+            <p class="supplemental-info">Minor in Music Industry Practices</p>
+            <p class="supplemental-info">SMU Provost Scholar, SMU Leadership Scholar, SMU Discovery Scholar, SMU University Honors Program</p>
+        </div>
+
+        <div class="section-content">
+            <h2>Technical Skills</h2>
+            <p>Machine Learning & AI | SQL | R (tidyverse, ggplot) | Python | TensorFlow | SAS | AWS | Tableau | PowerBI</p>
+        </div>
+
+        <div class="section-content">
+            <h2>Project Experience</h2>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>Cost of Living Clustering and Recommendation System</h3>
+                    <p>Data Visualization and Dashboard Development Project</p>
+                </div>
+                <div>
+                    <p class="experience-location">Remote</p>
+                    <p class="experience-dates">Jun 2024 – Aug 2024</p>
+                </div>
+            </div>
+            <ul>
+                <li>Conducted a comprehensive cluster analysis on U.S. cost of living data using K-Means, Gaussian Mixture Models, and other Machine Learning techniques to identify optimal clusters of regions, improving the understanding of cost distributions across different areas.</li>
+                <li>Developed a recommender system utilizing Machine Learning collaborative filtering techniques to suggest suitable counties for families based on affordability and living conditions, with applications in real estate, urban planning, and policymaking.</li>
+                <li>Integrated diverse data sources including housing costs, transportation expenses, and family size to provide actionable insights into regional cost of living variations.</li>
+            </ul>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>US Migration Pattern Dashboard</h3>
+                    <p>Data Visualization and Dashboard Development Project</p>
+                </div>
+                <div>
+                    <p class="experience-location">Remote</p>
+                    <p class="experience-dates">Jul 2024 – Aug 2024</p>
+                </div>
+            </div>
+            <ul>
+                <li>Developed an interactive Tableau dashboard that visualizes U.S. state migration patterns, combining state population data with migration inflows and outflows from the US Census Bureau.</li>
+                <li>Designed and optimized visualizations to clearly communicate complex migration patterns.</li>
+            </ul>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>Expense Tracker Web Application</h3>
+                    <p>Database Management and Web Development Project</p>
+                </div>
+                <div>
+                    <p class="experience-location">Remote</p>
+                    <p class="experience-dates">Feb 2024 – May 2024</p>
+                </div>
+            </div>
+            <ul>
+                <li>Led the development and optimization of a client-side data storing web application to compare performance between database management systems.</li>
+                <li>Utilized JavaScript, HTML, and CSS to build a functional web application able to store user-entered data.</li>
+                <li>Conducted comprehensive performance analysis comparing the efficacy of SQL and NoSQL databases in handling client-side data storage, leading to improved UI update speeds and responsiveness.</li>
+            </ul>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>Employee Attrition Prediction Case Study</h3>
+                    <p>Machine Learning and Regression Project</p>
+                </div>
+                <div>
+                    <p class="experience-location">Remote</p>
+                    <p class="experience-dates">Nov 2023 – Dec 2023</p>
+                </div>
+            </div>
+            <ul>
+                <li>Conducted exploratory data analysis of numerous employee demographics including job role, marital status, gender, and education field to determine what factors likely lead to employee attrition.</li>
+                <li>Utilized RShiny apps for visualizations and statistical t-tests to analyze relationships between variables.</li>
+                <li>Developed models using k-nearest neighbors (KNN) and Naive-Bayes classifiers to predict attrition.</li>
+                <li>Determined the most impactful factors on attrition through F1 score rankings from predictive models.</li>
+            </ul>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>SMU OREM Senior Design</h3>
+                    <p>Research and Analytics Project</p>
+                </div>
+                <div>
+                    <p class="experience-location">Dallas, TX</p>
+                    <p class="experience-dates">Jan 2023 – May 2023</p>
+                </div>
+            </div>
+            <ul>
+                <li>Executed market research and data collection and analysis in collaboration with local Dallas business Shug’s Bagels to evaluate the viability of opening a new location on SMU campus.</li>
+                <li>Conducted financial analysis to assess the profitability of the proposed new location, considering factors such as sales projections, operating costs, and potential cannibalization of existing sales.</li>
+                <li>Utilized data analytics techniques with R to analyze survey responses, identify trends, and quantify the potential impact of a new location on the existing business.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>Work Experience</h2>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>Human Resources Technologies Inc. (HRTec)</h3>
+                    <p>Data Science and Marketing Research Intern</p>
+                </div>
+                <div>
+                    <p class="experience-location">Remote</p>
+                    <p class="experience-dates">Jun 2024 – Aug 2024</p>
+                </div>
+            </div>
+            <ul>
+                <li>Conducted data analytics on survey results for HRTec's "All-in@Work DEIA Survey" utilizing Python to create visualizations and develop AI & Machine Learning models to identify trends impacting job satisfaction for HRTec clients.</li>
+                <li>Implemented an interactive PowerBI dashboard to visually demonstrate DEIA survey insights, allowing clients to dynamically engage with survey results and improving HRTec's competitive positioning in the DEIA survey market.</li>
+                <li>Provided actionable analytics and insights to federal government clients to optimize employee satisfaction and performance.</li>
+                <li>Authored research-based social media posts regarding cybersecurity news, contributing to the company’s thought leadership in the cybersecurity space.</li>
+            </ul>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>SMU Data Science and Research Services Team</h3>
+                    <p>Student Member</p>
+                </div>
+                <div>
+                    <p class="experience-location">Dallas, TX</p>
+                    <p class="experience-dates">Jun 2022 – May 2023</p>
+                </div>
+            </div>
+            <ul>
+                <li>Assisted in delivering comprehensive introductory data science lectures as a teaching assistant for SMU's Summer Research Experience for Undergrads, employing R and Python (Pandas, NumPy, Matplotlib).</li>
+                <li>Conducted meticulous analysis of voting datasets evaluating the extent of gerrymandering in all 50 states.</li>
+                <li>Employed visualization tools within R and Tableau to effectively communicate findings.</li>
+                <li>Utilized Markov Chain Monte Carlo methods in Python to develop equitable and representative U.S. House district maps for all 50 states.</li>
+                <li>Collaborated closely with a diverse team of researchers at SMU’s Data Science for Social Good Research Cluster.</li>
+            </ul>
+
+            <div class="experience-entry">
+                <div class="experience-title">
+                    <h3>SMU Residence Life and Student Housing</h3>
+                    <p>Resident Assistant</p>
+                </div>
+                <div>
+                    <p class="experience-location">Dallas, TX</p>
+                    <p class="experience-dates">Aug 2020 – May 2023</p>
+                </div>
+            </div>
+            <ul>
+                <li>Employed by SMU to ensure that a community of respect, camaraderie, and comfort is upheld in the on-campus Residential Commons.</li>
+                <li>Cultivated strong mentorship relationships with a diverse group of over 100 underclassmen.</li>
+                <li>Successfully mediated and resolved conflicts between residents.</li>
+                <li>Demonstrated exceptional leadership and organizational skills in managing administrative responsibilities such as coordinating duty schedules, documenting incident reports, and collaborating with campus resources.</li>
+            </ul>
+        </div>
+
+        <div class="section-content">
+            <h2>Additional Information</h2>
+            <p><strong>Languages:</strong> Proficient in written and conversational Spanish</p>
+            <p><strong>Additional Activities:</strong> SMU Program Council, Alpha Phi Omega Service Fraternity</p>
+            <p><strong>Interests:</strong> Running, Swimming, Cooking, Playing saxophone, Music production</p>
+        </div>
+    </div>
+</body>
+</html>
